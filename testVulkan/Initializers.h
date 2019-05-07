@@ -9,4 +9,8 @@ namespace Initializers {
 
 	VkInstanceCreateInfo InstanceCreateInfo(VkApplicationInfo &app_info);
 	VkInstanceCreateInfo InstanceCreateInfo(VkApplicationInfo &app_info, std::vector<const char*> &layers, std::vector<const char*> &extensions);
+
+	VkDeviceQueueCreateInfo DeviceQueueCreateInfo(uint32_t family_index);
+
+	VkDeviceCreateInfo DeviceCreateInfo(VkDeviceQueueCreateInfo& queue_info);
 }

@@ -144,13 +144,13 @@
   <ItemGroup>
     <ClCompile Include="Initializers.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Validationr.cpp" />
+    <ClCompile Include="Validation.cpp" />
     <ClCompile Include="VulkanInstance.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BUILD_ORDER.h" />
     <ClInclude Include="Initializers.h" />
-    <ClInclude Include="Validationr.h" />
+    <ClInclude Include="Validation.h" />
     <ClInclude Include="VulkanConfiguration.h" />
     <ClInclude Include="VulkanInstance.h" />
   </ItemGroup>

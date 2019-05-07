@@ -38,3 +38,33 @@ VkInstanceCreateInfo Initializers::InstanceCreateInfo(VkApplicationInfo& app_inf
 
 	return info;
 }
+
+VkDeviceQueueCreateInfo Initializers::DeviceQueueCreateInfo(uint32_t family_index)
+{
+	VkDeviceQueueCreateInfo info;
+	float queue_priorities[1] = { 0.0 };
+
+	info.queueFamilyIndex = family_index;
+	info.sType = VK_STRUCTURE_TYPE_DEVICE_QUEUE_CREATE_INFO;
+	info.pNext = NULL;
+	info.queueCount = 1;
+	info.pQueuePriorities = queue_priorities;
+
+	return info;
+}
+
+VkDeviceCreateInfo Initializers::DeviceCreateInfo(VkDeviceQueueCreateInfo& queue_info)
+{
+	VkDeviceCreateInfo info;
+	info.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
+	info.pNext = NULL;
+	info.queueCreateInfoCount = 1;
+	info.pQueueCreateInfos = &queue_info;
+	info.enabledLayerCount = 0;
+	info.ppEnabledLayerNames = NULL;
+	info.enabledExtensionCount = 0;
+	info.ppEnabledExtensionNames = NULL;
+	info.pEnabledFeatures = NULL;
+
+	return info;
+}

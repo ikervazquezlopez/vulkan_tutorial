@@ -6,7 +6,7 @@
 
 #include <vulkan/vulkan.h>
 
-#include "Validationr.h"
+#include "Validation.h"
 #include "VulkanConfiguration.h"
 #include "Initializers.h"
 

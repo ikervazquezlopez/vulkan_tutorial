@@ -21,10 +21,10 @@
     <ClCompile Include="Initializers.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Validationr.cpp">
+    <ClCompile Include="VulkanInstance.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="VulkanInstance.cpp">
+    <ClCompile Include="Validation.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -38,10 +38,10 @@
     <ClInclude Include="VulkanConfiguration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="Validationr.h">
+    <ClInclude Include="VulkanInstance.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="VulkanInstance.h">
+    <ClInclude Include="Validation.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
