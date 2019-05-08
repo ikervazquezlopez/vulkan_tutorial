@@ -21,6 +21,9 @@ public:
 
 private:
 
+	std::vector<const char*> layers;
+	std::vector<const char*> extensions;
+
 	VkDevice device;
 	VkCommandBuffer cmd_buffer;
 	VkCommandPool cmd_pool;

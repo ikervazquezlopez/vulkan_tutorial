@@ -33,7 +33,8 @@ VulkanDevice::VulkanDevice(VulkanInstance *instance)
 	/* Init graphical device */
 	this->queue_info = Initializers::DeviceQueueCreateInfo(family_index);
 
-	this->device_info = Initializers::DeviceCreateInfo(this->queue_info);
+	this->extensions.push_back(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
+	this->device_info = Initializers::DeviceCreateInfo(this->queue_info, this->layers, this->extensions);
 
 	VkResult res = vkCreateDevice(gpus[0], &this->device_info, NULL, &this->device);
 	assert(res == VK_SUCCESS);

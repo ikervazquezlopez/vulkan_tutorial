@@ -2,6 +2,7 @@
 
 
 VulkanInstance* instance;
+VulkanDevice* device;
 
 int main() 
 {
@@ -10,10 +11,9 @@ int main()
 	vulkan_config.application_version = VK_MAKE_VERSION(1, 0, 0);
 
 	instance = new VulkanInstance(vulkan_config);
+	device = new VulkanDevice(instance);
 
-
-	VulkanDevice* device = new VulkanDevice(instance);
-
+	
 
 
 	delete device;

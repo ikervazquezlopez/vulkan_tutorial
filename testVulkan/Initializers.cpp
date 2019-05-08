@@ -31,10 +31,10 @@ VkInstanceCreateInfo Initializers::InstanceCreateInfo(VkApplicationInfo& app_inf
 	VkInstanceCreateInfo info = {};
 	info.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
 	info.pApplicationInfo = &app_info;
-	info.enabledExtensionCount = extensions.size();
 	info.enabledLayerCount = layers.size();
-	info.ppEnabledExtensionNames = extensions.data();
 	info.ppEnabledLayerNames = layers.data();
+	info.enabledExtensionCount = extensions.size();
+	info.ppEnabledExtensionNames = extensions.data();
 
 	return info;
 }
@@ -53,17 +53,17 @@ VkDeviceQueueCreateInfo Initializers::DeviceQueueCreateInfo(uint32_t family_inde
 	return info;
 }
 
-VkDeviceCreateInfo Initializers::DeviceCreateInfo(VkDeviceQueueCreateInfo& queue_info)
+VkDeviceCreateInfo Initializers::DeviceCreateInfo(VkDeviceQueueCreateInfo& queue_info, std::vector<const char*>& layers, std::vector<const char*>& extensions)
 {
 	VkDeviceCreateInfo info;
 	info.sType = VK_STRUCTURE_TYPE_DEVICE_CREATE_INFO;
 	info.pNext = NULL;
 	info.queueCreateInfoCount = 1;
 	info.pQueueCreateInfos = &queue_info;
-	info.enabledLayerCount = 0;
-	info.ppEnabledLayerNames = NULL;
-	info.enabledExtensionCount = 0;
-	info.ppEnabledExtensionNames = NULL;
+	info.enabledLayerCount = layers.size();
+	info.ppEnabledLayerNames = layers.data();
+	info.enabledExtensionCount = extensions.size();
+	info.ppEnabledExtensionNames = extensions.data();
 	info.pEnabledFeatures = NULL;
 
 	return info;

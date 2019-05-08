@@ -4,7 +4,9 @@ VulkanInstance::VulkanInstance(VulkanConfiguration& vulkan_config)
 {
 	VkApplicationInfo application_info = Initializers::ApplicationInfo(vulkan_config);
 
-	VkInstanceCreateInfo instance_info = Initializers::InstanceCreateInfo(application_info, layers, extensions);
+	this->extensions.push_back(VK_KHR_SURFACE_EXTENSION_NAME);
+	VkInstanceCreateInfo instance_info = Initializers::InstanceCreateInfo(application_info, this->layers, this->extensions);
+	
 
 	ErrorCheck(vkCreateInstance(&instance_info, NULL, &instance));
 
