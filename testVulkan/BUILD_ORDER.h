@@ -11,4 +11,5 @@
 #include "Initializers.h"
 
 #include "VulkanInstance.h"
+#include "VulkanDevice.h"
 

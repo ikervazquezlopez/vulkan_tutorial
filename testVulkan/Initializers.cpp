@@ -68,3 +68,26 @@ VkDeviceCreateInfo Initializers::DeviceCreateInfo(VkDeviceQueueCreateInfo& queue
 
 	return info;
 }
+
+VkCommandPoolCreateInfo Initializers::CommandPoolCreateInfo(uint32_t family_index)
+{
+	VkCommandPoolCreateInfo info;
+	info.sType = VK_STRUCTURE_TYPE_COMMAND_POOL_CREATE_INFO;
+	info.pNext = NULL;
+	info.queueFamilyIndex = family_index;
+	info.flags = 0;
+
+	return info;
+}
+
+VkCommandBufferAllocateInfo Initializers::CommandBufferAllocateInfo(VkCommandPool cmd_pool)
+{
+	VkCommandBufferAllocateInfo info;
+	info.sType = VK_STRUCTURE_TYPE_COMMAND_BUFFER_ALLOCATE_INFO;
+	info.pNext = NULL;
+	info.commandPool = cmd_pool;
+	info.level = VK_COMMAND_BUFFER_LEVEL_PRIMARY;
+	info.commandBufferCount = 1;
+
+	return info;
+}

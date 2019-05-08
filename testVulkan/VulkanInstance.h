@@ -2,7 +2,7 @@
 
 #include "BUILD_ORDER.h"
 
-class VulkanInstance
+typedef class VulkanInstance
 {
 
 public:
@@ -21,7 +21,6 @@ private:
 	std::vector<const char*> extensions;
 
 	std::vector<VkPhysicalDevice> gpus;
-
 
 
 	/* METHODS */

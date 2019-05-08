@@ -13,4 +13,7 @@ namespace Initializers {
 	VkDeviceQueueCreateInfo DeviceQueueCreateInfo(uint32_t family_index);
 
 	VkDeviceCreateInfo DeviceCreateInfo(VkDeviceQueueCreateInfo& queue_info);
+
+	VkCommandPoolCreateInfo CommandPoolCreateInfo(uint32_t family_index);
+	VkCommandBufferAllocateInfo CommandBufferAllocateInfo(VkCommandPool cmd_pool);
 }
