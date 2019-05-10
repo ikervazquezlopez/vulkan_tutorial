@@ -91,3 +91,12 @@ VkCommandBufferAllocateInfo Initializers::CommandBufferAllocateInfo(VkCommandPoo
 
 	return info;
 }
+
+VkWin32SurfaceCreateInfoKHR Initializers::SurfaceCreateInfoKHR()
+{
+	VkWin32SurfaceCreateInfoKHR info;
+	info.sType = VK_STRUCTURE_TYPE_WIN32_SURFACE_CREATE_INFO_KHR;
+	info.pNext = NULL;
+	//info.hinstance
+	return info;
+}

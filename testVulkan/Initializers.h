@@ -4,6 +4,7 @@
 
 namespace Initializers {
 
+	
 
 	VkApplicationInfo ApplicationInfo(VulkanConfiguration& config);
 
@@ -16,4 +17,8 @@ namespace Initializers {
 
 	VkCommandPoolCreateInfo CommandPoolCreateInfo(uint32_t family_index);
 	VkCommandBufferAllocateInfo CommandBufferAllocateInfo(VkCommandPool cmd_pool);
+
+	VkWin32SurfaceCreateInfoKHR SurfaceCreateInfoKHR();
+
+
 }

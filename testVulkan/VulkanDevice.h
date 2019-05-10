@@ -8,9 +8,11 @@ class VulkanDevice
 {
 public:
 	VulkanDevice(VulkanInstance *instance);
+	VulkanDevice(VulkanInstance* instance, const char **extra_extensions, uint32_t extensions_count);
 	~VulkanDevice();
 
 	VkDevice& GetDevice();
+	VkPhysicalDevice& GetPhysicalDevice();
 	VkCommandBuffer& GetCommandBuffer();
 	VkCommandPool& GetCommandPool();
 
@@ -25,6 +27,7 @@ private:
 	std::vector<const char*> extensions;
 
 	VkDevice device;
+	VkPhysicalDevice physical_device;
 	VkCommandBuffer cmd_buffer;
 	VkCommandPool cmd_pool;
 

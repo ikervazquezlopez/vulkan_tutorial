@@ -7,6 +7,7 @@ typedef class VulkanInstance
 
 public:
 	VulkanInstance(VulkanConfiguration& vulkan_config);
+	VulkanInstance(VulkanConfiguration& vulkan_config, const char** extra_extensions, uint32_t extra_extensions_count);
 	~VulkanInstance();
 
 	VkInstance& GetInstance();

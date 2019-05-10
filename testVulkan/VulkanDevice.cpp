@@ -4,6 +4,7 @@ VulkanDevice::VulkanDevice(VulkanInstance *instance)
 {
 	/* Enumerate GPUs */
 	std::vector<VkPhysicalDevice> gpus = instance->GetGpus();
+	this->physical_device = gpus[0];
 
 	/* Init device family queue */
 	uint32_t queue_family_count;
@@ -52,6 +53,63 @@ VulkanDevice::VulkanDevice(VulkanInstance *instance)
 	assert(res == VK_SUCCESS);
 }
 
+VulkanDevice::VulkanDevice(VulkanInstance* instance, const char** extra_extensions, uint32_t extra_extensions_count)
+{
+	/* Enumerate GPUs */
+	std::vector<VkPhysicalDevice> gpus = instance->GetGpus();
+	this->physical_device = gpus[0];
+
+	/* Init device family queue */
+	uint32_t queue_family_count;
+	std::vector<VkQueueFamilyProperties> queue_props;
+
+	vkGetPhysicalDeviceQueueFamilyProperties(gpus[0], &queue_family_count, NULL);
+	assert(queue_family_count >= 0);
+
+	queue_props.resize(queue_family_count);
+	vkGetPhysicalDeviceQueueFamilyProperties(gpus[0], &queue_family_count, queue_props.data());
+	assert(queue_family_count >= 1);
+
+	bool found = false;
+	uint32_t family_index;
+	for (unsigned int i = 0; i < queue_family_count; i++) {
+		if (queue_props[i].queueFlags & VK_QUEUE_GRAPHICS_BIT) {
+			family_index = i;
+			found = true;
+			break;
+		}
+	}
+
+	assert(found);
+	assert(queue_family_count >= 1);
+
+
+	/* Init graphical device */
+	this->queue_info = Initializers::DeviceQueueCreateInfo(family_index);
+
+	this->extensions.push_back(VK_KHR_SWAPCHAIN_EXTENSION_NAME);
+	for (int i = 0; i < extra_extensions_count; i++)
+	{
+		this->extensions.push_back(extra_extensions[i]);
+	}
+	this->device_info = Initializers::DeviceCreateInfo(this->queue_info, this->layers, this->extensions);
+
+	VkResult res = vkCreateDevice(gpus[0], &this->device_info, NULL, &this->device);
+	assert(res == VK_SUCCESS);
+
+
+	/* Command pool */
+	this->cmd_pool_info = Initializers::CommandPoolCreateInfo(this->queue_info.queueFamilyIndex);
+
+	res = vkCreateCommandPool(this->device, &this->cmd_pool_info, NULL, &this->cmd_pool);
+	assert(res == VK_SUCCESS);
+
+	/* Command buffer for command pool */
+	this->cmd_buff_info = Initializers::CommandBufferAllocateInfo(this->cmd_pool);
+	res = vkAllocateCommandBuffers(this->device, &this->cmd_buff_info, &this->cmd_buffer);
+	assert(res == VK_SUCCESS);
+}
+
 VulkanDevice::~VulkanDevice()
 {
 	VkCommandBuffer cmd_bufs[1] = {this->cmd_buffer};
@@ -64,6 +122,11 @@ VulkanDevice::~VulkanDevice()
 VkDevice& VulkanDevice::GetDevice()
 {
 	return this->device;
+}
+
+VkPhysicalDevice& VulkanDevice::GetPhysicalDevice()
+{
+	return this->physical_device;
 }
 
 VkCommandBuffer& VulkanDevice::GetCommandBuffer()
